@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<template id="report_weight_waiver_report_doc">
+		<t t-call="web.external_layout">
+			<div class="page">
+				<t t-set="report_vals" t-value="o.get_weight_waiver_report_data()"/>
+
+				<div class="row">
+					<div style="width:100%;font-size:18px;font-weight:bold;text-align:center;">
+						Weight Waiver Report
+					</div>
+				</div>
+
+				<table class="table table-sm o_main_table" name="invoice_line_table">
+					<thead>
+						<tr>
+							<th class="text-left"><span>Delivery</span></th>
+							<th><span>Empty Truck Weight</span></th>
+							<th><span>Loaded Truck Weight</span></th>
+							<th><span>Difference Weight</span></th>
+						</tr>
+					</thead>
+					<tbody class="invoice_tbody">
+						<tr t-foreach="report_vals" t-as="line">
+							<td class="text-left">
+								<span t-esc="line['picking_name']"/>
+							</td>
+							<td>
+								<span t-esc="line['empty_truck_weight']"/>
+							</td>
+							<td>
+								<span t-esc="line['loaded_truck_weight']"/>
+							</td>
+							<td>
+								<span t-esc="line['difference_weight']"/>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</t>
+	</template>
+
+	<template id="report_weight_waiver_report">
+		<t t-call="web.html_container">
+			<t t-foreach="docs" t-as="o">
+				<t t-call="eq_san_cement_transport_mgt.report_weight_waiver_report_doc"/>
+			</t>
+		</t>
+	</template>
+
+</odoo>

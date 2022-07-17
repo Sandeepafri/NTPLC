@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="weight_waiver_report_form_view" model="ir.ui.view">
+            <field name="name">weight.waiver.report.form.view</field>
+            <field name="model">weight.waiver.report</field>
+            <field name="arch" type="xml">
+                <form>
+                    <field name="state" invisible="1"/>
+                    <field name="name" invisible="1"/>
+                    <group states="choose">
+                        <field name="company_id" required="1" groups="base.group_multi_company"
+                               options="{'no_open': True, 'no_create': True, 'no_create_edit': True}" />
+                    </group>
+                    <group col="4" states="choose">
+                        <field name="start_date" required="1"/>
+                        <field name="end_date" required="1"/>
+                    </group>
+
+                    <footer states ="choose">
+                        <button name="print_pdf_report" string="PDF" type="object" class="oe_highlight" />
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_weight_waiver_report">
+            <field name="name">Weight Waiver Report</field>
+            <field name="res_model">weight.waiver.report</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="weight_waiver_report_form_view"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem action="action_weight_waiver_report" id="menu_weight_waiver_report"
+            groups="eq_san_cement_transport_mgt.allow_transport_management"
+            parent="menu_transport_mgt" sequence="20"/>
+
+    </data>
+</odoo>

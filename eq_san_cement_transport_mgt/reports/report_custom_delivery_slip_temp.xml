@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<template id="report_custom_delivery_slip_temp_doc">
+		<!-- <t t-call="web.html_container"> -->
+		<div class="page">
+				<br/><br/>
+				<style>
+				table{
+				width: 100%;
+				border:1px solid;
+				}
+				table th, table td{
+				padding: 2px;
+				}
+				th{
+				text-align: center;
+				}
+				
+			</style>
+
+			<table>
+				<tr>
+					<td>
+						<img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="max-height: 75px;" alt="Logo"/>
+					</td>
+					<td>
+						<span t-field="o.company_id" style="text-align:center;font-weight:bold;margin-left:50px;"/>
+						<span t-esc="receipt_type" style="float:right;"/>
+						<p style="font-weight:bold;margin-left:80px;">Delivery Ticket(DT)</p>
+					</td>
+				</tr>
+
+				<!-- <tr>
+					<td>
+						<span>Deliver To</span>
+						<span t-field="o.partner_id"/>
+					</td>
+					<td/>
+					<td>
+						<span t-field="o.name" t-options="{'widget': 'barcode', 'width': 500, 'height': 100, 'img_style': 'width:200px;height:50px;'}"/>
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<span>Scheduled Date</span>
+						<span t-field="o.scheduled_date"/>
+					</td>
+					<td/>
+					<td>
+						<span>Code</span>
+						<span t-field="o.name"/>
+					</td>
+				</tr> -->
+			</table>
+
+			<table>
+				<tr style="float:right;">
+					<td>
+						<span t-field="o.name" t-options="{'widget': 'barcode', 'width': 600, 'height': 100, 'img_style': 'width:300px;height:50px;'}"/>
+					</td>
+				</tr>
+			</table>
+
+			<table style="height:200px;">
+				<tr>
+					<td>
+						<span style="font-weight:bold;">Deliver To: </span>
+						<span t-field="o.partner_id"/>
+					</td>
+					<td/>
+					<td>
+						<span style="font-weight:bold;">Ticket No: </span>
+						<span t-field="o.origin"/>
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<span style="font-weight:bold;">Date: </span>
+						<span t-field="o.scheduled_date"/>
+					</td>
+					<td/>
+					<td>
+						<span style="font-weight:bold;">Code: </span>
+						<span t-field="o.name"/>
+					</td>
+				</tr>
+
+				<t t-foreach="o.move_lines" t-as="move_line">
+					<tr>
+						<td>
+							<span style="font-weight:bold;">Product: </span>
+							<span t-field="move_line.product_id"/>
+						</td>
+						<td>
+							<span style="font-weight:bold;">UOM: </span>
+							<span t-field="move_line.product_uom"/>
+						</td>
+						<td>
+							<span style="font-weight:bold;">Qty: </span>
+							<span t-field="move_line.product_uom_qty"/>
+						</td>
+					</tr>
+				</t>
+
+				<tr>
+					<td width="40%">
+						<span style="font-weight:bold;">Prepared By: </span>
+					</td>
+					<td width="30%">
+						<span style="font-weight:bold;">Authorized By: </span>
+					</td>
+					<td width="30%">
+						<span style="font-weight:bold;">Received By: </span>
+					</td>
+				</tr>
+
+			</table>
+
+
+
+			<!-- <table>
+				<tr>
+					<td>
+						<span>Deliver To</span>
+						<span t-field="o.partner_id"/>
+					</td>
+					<td style="border:1px solid red;">
+						<span t-field="o.name" t-options="{'widget': 'barcode', 'width': 600, 'height': 100, 'img_style': 'width:300px;height:50px;'}"/>
+					</td>
+					<td>
+						<span>Ticket No</span>
+						<span t-field="o.origin"/>
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<span>Scheduled Date</span>
+						<span t-field="o.scheduled_date"/>
+					</td>
+					<td/>
+					<td>
+						<span>Code</span>
+						<span t-field="o.name"/>
+					</td>
+				</tr>
+
+			</table> -->
+		</div>
+		<!-- </t> -->
+	</template>
+
+	<template id="report_custom_delivery_slip_temp">
+		<t t-call="web.html_container">
+			<t t-foreach="docs" t-as="o">
+				<t t-foreach="['Original','Office','Factory']" t-as="receipt_type">
+					<t t-call="eq_san_cement_transport_mgt.report_custom_delivery_slip_temp_doc"/>
+				</t>
+				 <p style="page-break-before:always;"> </p>
+			</t>
+		</t>
+	</template>
+
+</odoo>

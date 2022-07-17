@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_stock_split_picking" model="ir.ui.view">
+        <field name="name">stock.split.picking.form</field>
+        <field name="model">stock.split.picking</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <!-- <field name="mode" /> -->
+                    <field name="total_delivered_qty" required="1"/>
+                    <field name="divide_number" required="1"/>
+                    <field name="picking_ids" invisible="True" />
+                </group>
+                <footer>
+                <button
+                        name="action_apply"
+                        class="btn btn-primary"
+                        string="Split"
+                        type="object"
+                    />
+                or
+                <button special="cancel" class="btn btn-secondary" string="Cancel" />
+            </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_stock_split_picking" model="ir.actions.act_window">
+        <field name="name">Split pickings</field>
+        <field name="res_model">stock.split.picking</field>
+        <field name="view_id" ref="view_stock_split_picking" />
+        <field name="target">new</field>
+    </record>
+</odoo>

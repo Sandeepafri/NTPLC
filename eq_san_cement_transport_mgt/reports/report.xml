@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="paperformat_delivery_slip_report" model="report.paperformat">
+		<field name="name">Delivery Coupon Report</field>
+		<field name="default" eval="True"/>
+		<field name="format">custom</field>
+		<field name="page_height">215</field>
+		<field name="page_width">310</field>
+		<field name="orientation">Landscape</field>
+		<field name="margin_top">0</field>
+		<field name="margin_bottom">0</field>
+		<field name="margin_left">7</field>
+		<field name="margin_right">7</field>
+		<field name="header_line" eval="False"/>
+		<field name="header_spacing">35</field>
+		<field name="dpi">90</field>
+	</record>
+
+	<record id="custom_delivery_slip_report" model="ir.actions.report">
+		<field name="name">Delivery Coupon Report</field>
+		<field name="model">stock.picking</field>
+		<field name="report_type">qweb-pdf</field>
+		<field name="report_name">eq_san_cement_transport_mgt.report_custom_delivery_slip_temp</field>
+		<field name="report_file">eq_san_cement_transport_mgt.report_custom_delivery_slip_temp</field>
+		<field name="print_report_name">'Delivery Coupon - %s' % (object.name)</field>
+		<field name="binding_model_id" ref="stock.model_stock_picking" />
+		<field name="binding_type">report</field>
+		<field name="groups_id" eval="[(4,ref('eq_san_cement_transport_mgt.allow_transport_management'))]"/>
+		<field name="paperformat_id" ref="eq_san_cement_transport_mgt.paperformat_delivery_slip_report"/>
+	</record>
+	
+	<record id="custom_weight_waiver_report" model="ir.actions.report">
+		<field name="name">Weight Waiver Report</field>
+		<field name="model">weight.waiver.report</field>
+		<field name="report_type">qweb-pdf</field>
+		<field name="report_name">eq_san_cement_transport_mgt.report_weight_waiver_report</field>
+		<field name="report_file">eq_san_cement_transport_mgt.report_weight_waiver_report</field>
+		<field name="print_report_name">'Weight Waiver Report'</field>
+	</record>
+
+	<record id="custom_cement_allocation_report" model="ir.actions.report">
+		<field name="name">Allocation Report</field>
+		<field name="model">cement.allocation</field>
+		<field name="report_type">qweb-pdf</field>
+		<field name="report_name">eq_san_cement_transport_mgt.report_cement_allocation</field>
+		<field name="report_file">eq_san_cement_transport_mgt.report_cement_allocation</field>
+		<field name="print_report_name">'Allocation - %s' % (object.name)</field>
+		<field name="binding_model_id" ref="eq_san_cement_transport_mgt.model_cement_allocation" />
+		<field name="binding_type">report</field>
+		<field name="groups_id" eval="[(4,ref('eq_san_cement_transport_mgt.allow_transport_management'))]"/>
+	</record>
+
+</odoo>
