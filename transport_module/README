@@ -1,0 +1,9 @@
+15.0.0.1 (8-10-2021)  ==>  Fixed issue while click on payment traceback and click on sent mail.
+15.0.0.2 ==>1.fixed issue of transport functionality should only work for delivery
+			2.fixed issue for validation issue of picking which is not outgoing
+			3.fixed issue of multi-company on transfer lines.
+15.0.0.3 ==>changed openerp to odoo.
+
+15th apr 2022
+15.0.0.4
+==> accounting object remove from module
